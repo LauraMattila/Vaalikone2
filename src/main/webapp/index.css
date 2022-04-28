@@ -190,3 +190,8 @@ body {
 	margin-bottom: 20px;
 	text-transform: uppercase;
 }
+
+.form{
+	text-align: center;
+	align-items: center;
+}
