@@ -76,7 +76,7 @@
             	<div class="col-lg-12 col-md-12 col-sm-12">
        				<h1>Admin management</h1>
       				<p>Edit site content.</p>
-      		 		<a class="btn btn-primary">Hallinnoi ehdokkaita</a>
+      		 		<a class="btn btn-primary" href='/rest/candidatesservice/read'>Hallinnoi ehdokkaita </a>
        		 		<a class="btn btn-primary" type="button" data-toggle="modal" data-target="#hallinnoiKysymys">Hallinnoi kysymyksiä</a>
       			</div>
    			</div>
