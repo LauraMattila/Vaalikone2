@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  
 <%@ page import="java.util.ArrayList" %>   
-<%@ page import="data.Questions" %>   
+<%@ page import="data.Questions" %>
+<%@ page import="data.Candidates" %>      
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 
@@ -76,7 +77,10 @@
             	<div class="col-lg-12 col-md-12 col-sm-12">
        				<h1>Admin management</h1>
       				<p>Edit site content.</p>
-      		 		<a class="btn btn-primary">Hallinnoi ehdokkaita</a>
+      				<form action="/rest/candidatesservice/read" method="get">
+      				<input class="button" type="submit" value="Edit candidates">
+      				</form>
+<!--       		 		<a class="btn btn-primary" type="button" href='/rest/candidatesservice/readCandidates'>Hallinnoi ehdokkaita </a> -->
        		 		<a class="btn btn-primary" type="button" data-toggle="modal" data-target="#hallinnoiKysymys">Hallinnoi kysymyksiä</a>
       			</div>
    			</div>
