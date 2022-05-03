@@ -139,4 +139,43 @@ public class Dao {
             return null;
         }
     }
+	
+	public Candidates readCandidates(String id) {
+		Candidates q=null;
+		try {
+			String sql="select * from ehdokkaat where EHDOKAS_ID=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet RS=pstmt.executeQuery();
+			while (RS.next()){
+				q=new Candidates();
+                q.setId(RS.getInt("EHDOKAS_ID"));
+                q.setLastName(RS.getString("SUKUNIMI"));
+                q.setFirstName(RS.getString("ETUNIMI"));
+                q.setParty(RS.getString("PUOLUE"));
+                q.setDomicile(RS.getString("KOTIPAIKKAKUNTA"));
+                q.setAge(RS.getInt("IKA"));
+                q.setParliament(RS.getString("MIKSI_EDUSKUNTAAN"));
+                q.setImprovement(RS.getString("MITA_ASIOITA_HALUAT_EDISTAA"));
+                q.setJob(RS.getString("AMMATTI"));
+			}
+			return q;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	
+	public ArrayList<Candidates> deleteCandidates(String id) {
+		try {
+			String sql="delete from ehdokkaat where EHDOKAS_ID=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			return readAllCandidates();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
 }

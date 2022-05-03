@@ -1,7 +1,18 @@
 package data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity(name="ehdokkaat")
+
 public class Candidates {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int EHDOKAS_ID;
 	private String SUKUNIMI;
 	private String ETUNIMI;
@@ -11,6 +22,8 @@ public class Candidates {
 	private String MIKSI_EDUSKUNTAAN;
 	private String MITA_ASIOITA_HALUAT_EDISTAA;
 	private String AMMATTI;
+	
+
 	
 	public Candidates(String id, String lastname, String firstname, String party, String domicile, int age, String parliament, String improvement, String job) {
 		// TODO Auto-generated constructor stub
@@ -24,9 +37,11 @@ public class Candidates {
 		this.MITA_ASIOITA_HALUAT_EDISTAA=improvement;
 		this.AMMATTI=job;
 	}
+	
 	public Candidates() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public int getId() {
 		
 		return EHDOKAS_ID;
