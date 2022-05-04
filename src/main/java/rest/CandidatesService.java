@@ -80,67 +80,69 @@ public class CandidatesService{
 		}
 	}
 	
-	@POST
-	@Path("/add")
+	@GET
+	@Path("/readoneadd")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Ehdokkaat postEhdokkaat(Ehdokkaat ehdokkaat) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(ehdokkaat);//The actual insertion line
-		em.getTransaction().commit();
-		return ehdokkaat;
-	}
-	
-	
-	@POST
-	@Path("/update")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void putJson(Ehdokkaat ehdokkaat) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		Ehdokkaat f=em.find(Ehdokkaat.class, ehdokkaat.getEHDOKAS_ID());
-		if (f!=null) {
-			em.merge(ehdokkaat);//The actual update line
-		}
-		em.getTransaction().commit();
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/showcandidatestoedit.jsp");
-		request.setAttribute("ehdokkaat", f);
+	public void readEhdokkaatadd() {
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/showcandidatestoadd.jsp");
 		try {
 		rd.forward(request, response);
 		}
 		catch(ServletException | IOException e){
 			e.printStackTrace();
 		}
-	}		
+	}
+	
+	
+	@POST
+	@Path("/add")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded")
+		public void addEhdokkaat(@FormParam("EHDOKAS_ID") String id, @FormParam("SUKUNIMI") String snimi, @FormParam("ETUNIMI") String enimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") int ika,@FormParam("miksi_eduskuntaan") String miksi_eduskuntaan,@FormParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa,@FormParam("ammatti") String ammatti) {
+			EntityManager em=emf.createEntityManager();
+			em.getTransaction().begin();
+			Ehdokkaat f=new Ehdokkaat(id, snimi,enimi,puolue ,kotipaikkakunta,ika,miksi_eduskuntaan,mita_asioita_haluat_edistaa,ammatti);
+			if (f!=null) {
+				em.merge(f);//The actual update line
+			}
+			em.getTransaction().commit();
+			readAllEhdokkaat();
+	}
+	
+	
+	@POST
+	@Path("/update")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded")
+	public void updateEhdokkaat(@FormParam("EHDOKAS_ID") String id, @FormParam("SUKUNIMI") String snimi, @FormParam("ETUNIMI") String enimi, @FormParam("puolue") String puolue, @FormParam("kotipaikkakunta") String kotipaikkakunta, @FormParam("ika") int ika,@FormParam("miksi_eduskuntaan") String miksi_eduskuntaan,@FormParam("mita_asioita_haluat_edistaa") String mita_asioita_haluat_edistaa,@FormParam("ammatti") String ammatti) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		Ehdokkaat f=new Ehdokkaat(id, snimi,enimi,puolue ,kotipaikkakunta,ika,miksi_eduskuntaan,mita_asioita_haluat_edistaa,ammatti);
+		if (f!=null) {
+			em.merge(f);//The actual update line
+		}
+		em.getTransaction().commit();
+		readAllEhdokkaat();
+	}
+	
 		
 
 	
 	@GET
-	@Path("/delete/{EHDOKAS_ID}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void delete(@PathParam("EHDOKAS_ID") int i) {
-		EntityManagerFactory emf=Persistence.createEntityManagerFactory("vaalikone2");
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		Ehdokkaat f=em.find(Ehdokkaat.class, i);
-		if (f!=null) {
-			em.remove(f);//The actual insertion line
-		}
-		em.getTransaction().commit();
-		readAllEhdokkaat();
-		//Calling the method readFish() of this service
-//		RequestDispatcher rd=request.getRequestDispatcher("/jsp/candidatesadmin.jsp");
-//		request.setAttribute("ehdokkaat", f);
-//		try {
-//		rd.forward(request, response);
-//		}
-//		catch(ServletException | IOException e){
-//			e.printStackTrace();
-//		}
+    @Path("/delete/{EHDOKAS_ID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void delete(@PathParam("EHDOKAS_ID") int i) {
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("vaalikone2");
+        EntityManager em=emf.createEntityManager();
+        em.getTransaction().begin();
+        Ehdokkaat f=em.find(Ehdokkaat.class, i);
+        if (f!=null) {
+            em.remove(f);//The actual insertion line
+        }
+        em.getTransaction().commit();
+        readAllEhdokkaat();
 		
 	}
-	
 }
