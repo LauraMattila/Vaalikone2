@@ -93,11 +93,11 @@ public class CandidatesService{
 	}
 	
 	
-	@PUT
+	@POST
 	@Path("/update")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateEhdokkaat(Ehdokkaat ehdokkaat) {
+	public void putJson(Ehdokkaat ehdokkaat) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
 		Ehdokkaat f=em.find(Ehdokkaat.class, ehdokkaat.getEHDOKAS_ID());
@@ -117,11 +117,11 @@ public class CandidatesService{
 		
 
 	
-	@DELETE
+	@GET
 	@Path("/delete/{EHDOKAS_ID}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteEhdokkaat(@PathParam("EHDOKAS_ID") int i) {
+	public void delete(@PathParam("EHDOKAS_ID") int i) {
 		EntityManagerFactory emf=Persistence.createEntityManagerFactory("vaalikone2");
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
@@ -130,15 +130,16 @@ public class CandidatesService{
 			em.remove(f);//The actual insertion line
 		}
 		em.getTransaction().commit();
+		readAllEhdokkaat();
 		//Calling the method readFish() of this service
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/showcandidatestoedit.jsp");
-		request.setAttribute("ehdokkaat", f);
-		try {
-		rd.forward(request, response);
-		}
-		catch(ServletException | IOException e){
-			e.printStackTrace();
-		}
+//		RequestDispatcher rd=request.getRequestDispatcher("/jsp/candidatesadmin.jsp");
+//		request.setAttribute("ehdokkaat", f);
+//		try {
+//		rd.forward(request, response);
+//		}
+//		catch(ServletException | IOException e){
+//			e.printStackTrace();
+//		}
 		
 	}
 	

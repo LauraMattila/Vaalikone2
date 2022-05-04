@@ -19,9 +19,6 @@
 			ID: <input type='text' name='EHDOKAS_ID' value='${ehdokkaat.EHDOKAS_ID}'readonly><br>
  			Sukunimi: <input type='text' name='SUKUNIMI' size="100" value='${ehdokkaat.SUKUNIMI}'><br>
  			Etunimi: <input type='text' name='ETUNIMI' size="100" value='${ehdokkaat.ETUNIMI}'><br>
-<%-- 			Kysymys: <input type='text' name='KYSYMYS' size="100" value='${requestScope.kysymykset.question}'><br> --%>
-<%-- 			Kysymys: <input type='text' name='KYSYMYS' size="100" value='${requestScope.kysymykset.question}'><br> --%>
-<%-- 			Kysymys: <input type='text' name='KYSYMYS' size="100" value='${requestScope.kysymykset.question}'><br> --%>
 			<input type='submit' name='ok' value='Send'> 
 		</form>
 	</body>
