@@ -46,7 +46,7 @@
 	
 	
 		<servlet>
-		<servlet-name>candidatesservice</servlet-name>
+		<servlet-name>candidatesservice,uploadservice</servlet-name>
 		<servlet-class>
 			org.glassfish.jersey.servlet.ServletContainer
 		</servlet-class>
@@ -83,7 +83,7 @@
 	
 	
 		<servlet-mapping>
-		<servlet-name>candidatesservice</servlet-name>
+		<servlet-name>candidatesservice,uploadservice</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -21,55 +21,11 @@
     <body>
     
 
-<!-- Header -->
-  		<div class="sticky-top bg-primary">
-   			<nav class="navbar navbar-expand-md">
-      			<a class="navbar-brand" href="#">Logo</a>
-      			<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-        			<span class="navbar-toggler-icon"></span>
-      			</button>
-      		<div class="collapse navbar-collapse" id="main-navigation">
-        		<ul class="navbar-nav">
-          			<li class="nav-item">
-            			<a class="nav-link" href="/index.html">Home</a>
-          			</li>
-          			<li class="nav-item">
-            			<a class="nav-link" href="/index.html">Logout</a>
-          			</li>
-          		</ul>
-      		</div>
-    		</nav>
- 		</div>
- 		
- 		        <div class="description-card mt-5">
-    	<div class="container features">
-        	<div class="row">
-            	<div class="col-lg-12 col-md-12 col-sm-12">
-					<h1>Edit Candidates!</h1>
-    
- 		
-  		<div>
-  		<c:forEach var="ehdokkaat" items="${requestScope.ehdokkaat}"> 
-  			<li>Sukunimi: ${ehdokkaat.SUKUNIMI} Etunimi: ${ehdokkaat.ETUNIMI} Puolue: ${ehdokkaat.PUOLUE} <a href='/rest/candidatesservice/delete/${ehdokkaat.EHDOKAS_ID}'>Delete </a>
-  			<a href='/rest/candidatesservice/readone/${ehdokkaat.EHDOKAS_ID}'>Edit</a>
-  			<a href='/jsp/upload.jsp'>Upload</a></li>
- 	 	</c:forEach>
- 		</div>
-
-    	
-
-<!-- Question list -->
-
-					<!-- Loop -->
-
-  					<div class="text-center mt-5">
-    					<br><a href='/rest/candidatesservice/readoneadd' class="btn btn-primary">Add candidate</a>
-  					</div>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
-  				
+<h1>Select file to upload</h1>
+<form action="./rest/uploadservice/fileupload" method="post" enctype="multipart/form-data">
+    Select a file : <input type="file" name='${ehdokkaat.EHDOKAS_ID}' accept=".png" /><br>
+    <input type="submit" value="Upload" />
+</form>
 
 <!-- Footer -->
     <footer class="page-footer">
